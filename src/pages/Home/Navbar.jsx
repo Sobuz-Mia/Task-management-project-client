@@ -18,7 +18,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar flex justify-between">
+    <div className="navbar flex justify-between text-slate-100">
       <div className="">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -49,17 +49,14 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
-      <div className=" flex gap-5">
-        <button className="btn btn-ghost bg-[#264653] text-white text-xl font-bold rounded-full">
-          Create a Task
-        </button>
+      <div>
         <ul className="flex">
-          <li className="text-xl">
-            <NavLink to={"/task"}>Login</NavLink>
+          <li className="text-lg">
+            <NavLink to={"/login"}>Login</NavLink>
           </li>
           <div className="divider lg:divider-horizontal divider-neutral"></div> 
-          <li className="text-xl">
-            <NavLink to={"/task"}>Sign Up</NavLink>
+          <li className="text-lg">
+            <NavLink to={"/sign-up"}>Sign Up</NavLink>
           </li>
         </ul>
       </div>
