@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const navLinks = (
     <>
-      <li>
+      <li className="">
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
@@ -52,11 +52,11 @@ const Navbar = () => {
       <div>
         <ul className="flex">
           <li className="text-lg">
-            <NavLink to={"/login"}>Login</NavLink>
+            <Link to={"/login"}>Login</Link>
           </li>
           <div className="divider lg:divider-horizontal divider-neutral"></div> 
           <li className="text-lg">
-            <NavLink to={"/sign-up"}>Sign Up</NavLink>
+            <Link to={"/sign-up"}>Sign Up</Link>
           </li>
         </ul>
       </div>
