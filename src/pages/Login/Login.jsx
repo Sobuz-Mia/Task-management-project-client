@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
 import image from "../../assets/Signup.jpg";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 const Login = () => {
+    const {loggedInUser} = useAuth();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
-    const userInfo = {
-        email:form.email.value,
-        password:form.password.value,
-    }
+    const email = form.email.value;
+    const password = form.password.value;
+    loggedInUser(email,password).then(result=>{
+        form.reset();
+        if(result.user){
+            toast.success("Log in successfully!")
+        }
+    })
   };
   return (
     <div className="flex gap-4 p-3">
@@ -54,7 +61,9 @@ const Login = () => {
               </Link>
             </p>
             <p className="text-center my-4">Or Continue With</p>
-            <button className="btn btn-ghost text-[#B827AF] btn-outline w-3/4">Login With Google</button>
+            <button className="btn btn-ghost text-[#B827AF] btn-outline w-3/4">
+              Login With Google
+            </button>
           </div>
         </form>
       </div>
