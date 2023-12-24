@@ -1,20 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import image from "../../assets/Signup.jpg";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 const Login = () => {
-    const {loggedInUser} = useAuth();
+  const { loggedInUser, googleLogIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const form = location?.state?.from?.pathname || '/';
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    loggedInUser(email,password).then(result=>{
-        form.reset();
-        if(result.user){
-            toast.success("Log in successfully!")
-        }
-    })
+    loggedInUser(email, password).then((result) => {
+      form.reset();
+      if (result.user) {
+        toast.success("Log in successfully!");
+        navigate(form, {replace:true})
+      }
+    });
+  };
+  const handleGoogleLogin = () => {
+    googleLogIn().then((result) => {
+      if (result.user) {
+        toast.success("Log in successfully");
+        navigate(form, {replace:true})
+      }
+    });
   };
   return (
     <div className="flex gap-4 p-3">
@@ -61,7 +73,10 @@ const Login = () => {
               </Link>
             </p>
             <p className="text-center my-4">Or Continue With</p>
-            <button className="btn btn-ghost text-[#B827AF] btn-outline w-3/4">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn btn-ghost text-[#B827AF] btn-outline w-3/4"
+            >
               Login With Google
             </button>
           </div>

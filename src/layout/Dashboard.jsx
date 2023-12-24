@@ -10,7 +10,7 @@ const Dashboard = () => {
     <div className="flex gap-10 ">
       <div className="w-64 min-h-screen bg-[#1F2937] px-9 py-6 text-center text-white">
         <h2 className="text-2xl font-extrabold uppercase"> Dashboard</h2>
-        <div className="dropdown mb-10 mt-2">
+        <div className="dropdown mb-8 mt-2">
           <div
             tabIndex={0}
             role="button"
@@ -22,14 +22,15 @@ const Dashboard = () => {
                 src={user&& user?.photoURL}
               />
             </div>
-            <p>{user&& user?.displayName}</p>
-            <p>{user&& user?.email}</p>
+           
           </div>
+          <p className="">{user&& user?.displayName}</p>
+            <p>{user&& user?.email}</p>
         </div>
         <ul className="menu p-2">
           <>
             <li className="list-none mb-2">
-              <NavLink to={"/dashboard/userHome"}>
+              <NavLink to={"/dashboard/new-task"}>
                 <IoMdCreate />
                 Create New task
               </NavLink>
