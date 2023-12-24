@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../pages/Home/Navbar";
+import Footer from "../pages/Footer/Footer";
+import UserCategoriesSection from "../pages/Home/UserCategoriesSection";
 
 const Main = () => {
   return (
@@ -10,6 +12,8 @@ const Main = () => {
         </div>
       </div>
       <Outlet />
+      <UserCategoriesSection/>
+      <Footer/>
     </div>
   );
 };
