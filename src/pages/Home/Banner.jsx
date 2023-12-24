@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import bannerImg from "../../assets/banner.png";
 // import logo from '../../assets/banner-removebg-preview.png'
 const Banner = () => {
@@ -8,7 +9,7 @@ const Banner = () => {
           Task management made simple and collaborative.
           <br /> Enhance your workflow, achieve more together.
         </h2>
-        <button className="btn mt-5 btn-ghost text-white bg-[#B827AF] text-xl">Let’s Explore</button>
+       <Link to={'Dashboard'}> <button className="btn mt-5 btn-ghost text-white bg-[#B827AF] text-xl">Let’s Explore</button></Link>
       </div>
       <img
         className="bg-gradient-to-r from-[#38065D] to-[#56077E] rounded-lg h-[500px] w-full"

@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import image from "../../assets/Signup.jpg";
 import useAuth from "./../../hooks/useAuth";
 import toast from "react-hot-toast";
 const SignUp = () => {
-  const { createUser } = useAuth();
+  const { createUser ,handleUpdateProfile} = useAuth();
+  const navigate = useNavigate();
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,9 +14,16 @@ const SignUp = () => {
     const photo = form.photo.value;
     createUser(email, password).then((result) => {
       if (result.user) {
-        toast.success("User Created Successfully!");
-      }
+        handleUpdateProfile(name,photo).then(()=>{
+          // const user ={
+          //   email:email,
+          //   userName:name
+          // }
+          toast.success("User Created Successfully!");
+          navigate('/')
+        })
       
+      }
     });
   };
   return (
