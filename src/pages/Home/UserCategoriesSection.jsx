@@ -40,7 +40,7 @@ const UserCategoriesSection = () => {
         <h2 className="text-3xl font-bold mb-8">
           Who Can Benefit from Our Platform?
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" data-aos="fade-right">
           {userCategories.map((userCategory, index) => (
             <div key={index} className="bg-white p-6 rounded-md shadow-md">
               <h3 className="text-xl font-bold mb-2">

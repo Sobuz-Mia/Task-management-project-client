@@ -3,9 +3,11 @@ import toast from "react-hot-toast";
 import useAxios from "./../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const CreateTask = () => {
   const axios = useAxios();
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -15,12 +17,19 @@ const CreateTask = () => {
   const { data: allTask = [], refetch } = useQuery({
     queryKey: ["allTask"],
     queryFn: async () => {
-      const res = await axios.get("/allTask");
+      const res = await axios.get(`/allTask?email=${user?.email}`);
       return res.data;
     },
   });
   const onSubmit = (data) => {
-    axios.post("/tasks", data).then((res) => {
+    const taskInfo = {
+      title: data.title,
+      description: data.description,
+      deadline: data.deadline,
+      priority: data.priority,
+      email: user?.email,
+    };
+    axios.post("/tasks", taskInfo).then((res) => {
       if (res.data.insertedId) {
         reset();
         toast.success("Your task submitted successfully");
