@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAxios from "./../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const CreateTask = () => {
   const axios = useAxios();
@@ -18,13 +19,36 @@ const CreateTask = () => {
       return res.data;
     },
   });
-  console.log(allTask);
   const onSubmit = (data) => {
     axios.post("/tasks", data).then((res) => {
       if (res.data.insertedId) {
         reset();
         toast.success("Your task submitted successfully");
         refetch();
+      }
+    });
+  };
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`/task?id=${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
       }
     });
   };
@@ -100,8 +124,16 @@ const CreateTask = () => {
           </li>
           {allTask &&
             allTask.map((item, index) => (
-              <li className="text-left btn flex flex-col my-2" key={item._id}>
-                {index + 1}.{item.title}
+              <li className="text-left btn flex my-2" key={item._id}>
+                <span>
+                  {index + 1}. {item.title}
+                </span>
+                <button
+                  onClick={() => handleDelete(item._id)}
+                  className="text-red-500 btn-ghost p-2"
+                >
+                  Delete
+                </button>
               </li>
             ))}
         </ul>
