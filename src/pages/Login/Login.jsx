@@ -6,7 +6,6 @@ const Login = () => {
   const { loggedInUser, googleLogIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const form = location?.state?.from?.pathname || '/';
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,7 +15,9 @@ const Login = () => {
       form.reset();
       if (result.user) {
         toast.success("Log in successfully!");
-        navigate(form, {replace:true})
+        navigate(location?.state ? location.state : "/");
+      }else{
+        toast.error("Invalid Email or Password")
       }
     });
   };
@@ -24,7 +25,7 @@ const Login = () => {
     googleLogIn().then((result) => {
       if (result.user) {
         toast.success("Log in successfully");
-        navigate(form, {replace:true})
+        navigate(location?.state ? location.state : "/");
       }
     });
   };

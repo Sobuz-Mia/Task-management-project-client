@@ -6,25 +6,27 @@ import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../layout/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import CreateTask from "../pages/dashboard/CreateTask";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement:<ErrorPage/>,
     children: [
       {
         path: "/",
         element: <Home />,
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/sign-up",
-        element: <SignUp />,
-      },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
   },
   {
     path: "Dashboard",
